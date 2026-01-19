@@ -65,13 +65,6 @@ gsap.fromTo(scene.rotation, {
 });
 
 
-/* RENDERING */
-function render() {
-  requestAnimationFrame(render);
-  geometry.setFromPoints(vertices);
-  saraGeometry.setFromPoints(saraVertices); // أضف هذا السطر لتحديث نقاط الاسم
-  renderer.render(scene, camera);
-}
 
 /* EVENTS */
 function onWindowResize() {

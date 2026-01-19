@@ -64,46 +64,6 @@ gsap.fromTo(scene.rotation, {
   duration: 3
 });
 
-/* SARA PARTICLES */
-const saraFontSize = 100;
-const saraCanvas = document.createElement('canvas');
-saraCanvas.width = 400;
-saraCanvas.height = 200;
-const ctx = saraCanvas.getContext('2d');
-ctx.font = `bold ${saraFontSize}px Arial`;
-ctx.fillStyle = "#fff";
-ctx.textBaseline = "top";
-ctx.fillText('sara', 20, 40);
-
-const saraVertices = [];
-const imageData = ctx.getImageData(0, 0, saraCanvas.width, saraCanvas.height);
-for (let y = 0; y < saraCanvas.height; y += 2) {
-  for (let x = 0; x < saraCanvas.width; x += 2) {
-    const index = (y * saraCanvas.width + x) * 4;
-    if (imageData.data[index + 3] > 128) {
-      const vector = new THREE.Vector3(
-        x - 200,
-        -y + 100,
-        (Math.random() - 0.5) * 40
-      );
-      saraVertices.push(vector);
-      tl.from(vector, {
-        x: 0,
-        y: 0,
-        z: 0,
-        ease: "power2.inOut",
-        duration: "random(2, 5)"
-      }, (saraVertices.length + vertices.length) * 0.002);
-    }
-  }
-}
-
-const saraGeometry = new THREE.BufferGeometry().setFromPoints(saraVertices);
-const saraMaterial = new THREE.PointsMaterial({ color: 0xffff00, size: 0 }); // لون أصفر أو غيره
-const saraParticles = new THREE.Points(saraGeometry, saraMaterial);
-saraParticles.position.x = particles.position.x;
-saraParticles.position.y = particles.position.y;
-scene.add(saraParticles);
 
 /* RENDERING */
 function render() {
